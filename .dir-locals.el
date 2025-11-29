@@ -1,1 +1,7 @@
-((astro-ts-mode . ((lsp-astro-typescript-tsdk . "node_modules/typescript/lib"))))
+((nil . ((apheleia-formatters . ((prettier-local "pnpm" "prettier" "--stdin-filepath" filepath)))
+         (apheleia-mode-alist . ((astro-ts-mode . prettier-local)
+                                 (jtsx-tsx-mode . prettier-local)
+                                 (jtsx-jsx-mode . prettier-local)
+                                 (jtsx-typescript-mode . prettier-local)
+                                 (jtsx-js-mode . prettier-local)))))
+ (astro-ts-mode . ((lsp-astro-typescript-tsdk . "node_modules/typescript/lib"))))

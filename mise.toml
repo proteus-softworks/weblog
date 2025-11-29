@@ -24,3 +24,6 @@ run = "mise astro preview"
 description = "Install dependencies"
 run = "pnpm install"
 
+[tasks.format]
+description = "Format files"
+run = "pnpm prettier --write ."
