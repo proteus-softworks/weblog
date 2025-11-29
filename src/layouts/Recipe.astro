@@ -1,0 +1,110 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+
+type Props = CollectionEntry<"recipe">["data"];
+
+const { title, ingredients, cookwares, steps, metadata } = Astro.props;
+
+// Filter out title from metadata since we display it separately
+const { title: _, ...otherMetadata } = metadata;
+const metadataEntries = Object.entries(otherMetadata);
+---
+
+<Layout>
+  <body>
+    <main>
+      <article>
+        <div class="prose">
+          <h1>{title}</h1>
+
+          {
+            metadataEntries.length > 0 && (
+              <dl class="metadata">
+                {metadataEntries.map(([key, value]) => (
+                  <>
+                    <dt>{key}</dt>
+                    <dd>{value}</dd>
+                  </>
+                ))}
+              </dl>
+            )
+          }
+
+          <hr />
+
+          <div class="recipe-content">
+            <aside class="recipe-sidebar">
+              {
+                ingredients.length > 0 && (
+                  <section class="ingredients">
+                    <h2>Ingredients</h2>
+                    <ul>
+                      {ingredients.map((ing) => (
+                        <li>
+                          {ing.quantity && (
+                            <span class="quantity">{ing.quantity}</span>
+                          )}
+                          {ing.units && <span class="units">{ing.units}</span>}
+                          <span class="name">{ing.name}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )
+              }
+
+              {
+                cookwares.length > 0 && (
+                  <section class="cookware">
+                    <h2>Cookware</h2>
+                    <ul>
+                      {cookwares.map((item) => (
+                        <li>
+                          {item.quantity && (
+                            <span class="quantity">{item.quantity}</span>
+                          )}
+                          <span class="name">{item.name}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )
+              }
+            </aside>
+
+            <section class="steps">
+              <h2>Instructions</h2>
+              <ol>
+                {
+                  steps.map((step) => (
+                    <li>
+                      {step.map((part) => {
+                        if (part.type === "text") {
+                          return part.value;
+                        }
+                        if (part.type === "ingredient") {
+                          return <mark class="ingredient">{part.name}</mark>;
+                        }
+                        if (part.type === "cookware") {
+                          return <mark class="cookware">{part.name}</mark>;
+                        }
+                        if (part.type === "timer") {
+                          const duration = part.quantity
+                            ? `${part.quantity} ${part.units || ""}`.trim()
+                            : part.name;
+                          return <mark class="timer">{duration}</mark>;
+                        }
+                        return null;
+                      })}
+                    </li>
+                  ))
+                }
+              </ol>
+            </section>
+          </div>
+        </div>
+      </article>
+    </main>
+  </body>
+</Layout>
