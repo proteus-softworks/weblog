@@ -34,13 +34,6 @@ run="""
 scp -i $VPS_SSH_PUB_KEY
 """
 
-[tasks.publish]
-description = "Publish content"
-run = """
-mise scp -r ./src/content/posts deploy@$VPS_HOST:/var/lib/weblog/content/posts
-mise scp -r ./src/content/recipes deploy@$VPS_HOST:/var/lib/weblog/content/recipes
-"""
-
 [tasks."prod:ssh"]
 description = "SSH"
 run="""
