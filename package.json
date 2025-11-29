@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.12",
+    "@astrojs/node": "^9.5.1",
     "@astrojs/sitemap": "^3.6.0",
     "@astrojs/ts-plugin": "^1.10.6",
     "@cooklang/cooklang-ts": "^1.2.8",
