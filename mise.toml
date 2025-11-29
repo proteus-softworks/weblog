@@ -1,6 +1,5 @@
 [tools]
 pnpm = "10.24"
-cookcli = 
 
 [env]
 PROJECT = "weblog"
@@ -28,3 +27,22 @@ run = "pnpm install"
 [tasks.format]
 description = "Format files"
 run = "pnpm prettier --write ."
+
+[tasks.ssh]
+description = "SSH"
+run="""
+ssh -t -i $VPS_SSH_PUB_KEY deploy@$VPS_HOST
+"""
+
+[tasks.scp]
+description = "SCP"
+run="""
+scp -i $VPS_SSH_PUB_KEY
+"""
+
+[tasks.publish]
+description = "Publish content"
+run = """
+mise scp -r ./src/content/posts/* deploy@$VPS_HOST:/var/lib/weblog/content/posts
+mise scp -r ./src/content/recipes/* deploy@$VPS_HOST:/var/lib/weblog/content/recipes
+"""
