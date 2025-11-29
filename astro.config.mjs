@@ -8,9 +8,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 import node from "@astrojs/node";
 
-// https://astro.build/config
 export default defineConfig({
-  site: "https://blog.proteus.works",
+  site: "https://weblog.proteus.works",
   integrations: [mdx(), sitemap()],
 
   vite: {
