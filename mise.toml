@@ -1,0 +1,26 @@
+[tools]
+pnpm = "10.24"
+
+[env]
+PROJECT = "weblog"
+
+[tasks.astro]
+description = "Start dev server"
+run = "pnpm astro"
+
+[tasks.dev]
+description = "Start dev server"
+run = "mise astro dev"
+
+[tasks.build]
+description = "Build application"
+run = "mise astro build"
+
+[tasks.preview]
+description = "Preview application"
+run = "mise astro preview"
+
+[tasks.deps]
+description = "Install dependencies"
+run = "pnpm install"
+
