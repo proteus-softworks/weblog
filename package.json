@@ -14,6 +14,7 @@
     "@astrojs/sitemap": "^3.6.0",
     "@astrojs/ts-plugin": "^1.10.6",
     "@cooklang/cooklang-ts": "^1.2.8",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/neuton": "^5.2.7",
     "@fontsource/sixtyfour-convergence": "^5.2.10",

@@ -19,4 +19,11 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
+
+  markdown: {
+    shikiConfig: {
+      // https://shiki.style/themes
+      theme: "catppuccin-mocha",
+    },
+  },
 });

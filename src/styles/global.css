@@ -5,10 +5,12 @@
   --font-sixtyfour: 'Sixtyfour Convergence', 'sans-serif';
   --font-workbench: 'Workbench', 'monospace';
   --font-neuton: 'Neuton', 'serif';
+  --font-ibm-plex: 'IBM Plex Mono', 'monospace';
 
   --font-console: var(--font-workbench);
   --font-sans: var(--font-inter);
   --font-serif: var(--font-neuton);
+  --font-mono: var(--ibm-plex);
 
   --color-base-100: oklch(30.33% 0.016 252.42);
   --color-base-200: oklch(25.26% 0.014 253.1);
@@ -44,6 +46,11 @@
   --border: 1.5px;
   --depth: 1;
   --noise: 0;
+
+  --breakpoint-*: initial;
+  --breakpoint-tablet: 40rem;
+  --breakpoint-laptop: 64rem;
+  --breakpoint-desktop: 80rem;
 }
 
 /******************************************************************************
@@ -51,14 +58,15 @@
  ******************************************************************************/
 
 * {
-  line-height: inherit;
+  line-height: inherit
 }
 
 body {
+  @apply text-base tablet:text-lg;
   color: var(--color-base-content);
   background-color: var(--color-background);
   font-family: var(--font-serif);
-  font-size: 1.4rem;
+  font-size-adjust: 0.6;
   /* letter-spacing: 0.06rem; */
 }
 
@@ -73,32 +81,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 2rem;
+    @apply text-[calc(1.375rem+1.5vw)] desktop:text-5xl;
     font-weight: 700;
 }
 
 h2 {
-    font-size: 1.6rem;
+    @apply text-[calc(1.325rem+0.9vw)] desktop:text-4xl;
     font-weight: 700;
 }
 
 h3 {
-    font-size: 1.4rem;
+    @apply text-[calc(1.3rem+0.6vw)] desktop:text-3xl;
     font-weight: 700;
 }
 
 h4 {
-    font-size: 1.3rem;
+    @apply text-[calc(1.275rem+0.3vw)] desktop:text-2xl;
     font-weight: 700;
 }
 
 h5 {
-    font-size: 1.2rem;
+    @apply text-xl;
     font-weight: 600;
 }
 
 h6 {
-    font-size: 1rem;
     font-weight: 500;
 }
 
@@ -125,5 +132,10 @@ hr {
 }
 
 .prose p {
-  padding-bottom: 1rem; 
+  @apply leading-[1.6rem] tablet:leading-[2rem] pb-[1rem] tablet:pb-[2rem];
+}
+
+.astro-code {
+    @apply p-4 tablet:p-6 rounded-md text-sm tablet:text-base;
+    font-family: var(--font-mono);
 }
