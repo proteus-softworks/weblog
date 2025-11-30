@@ -14,6 +14,13 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
+import "@fontsource/sixtyfour-convergence";
+import "@fontsource/workbench";
+import "@fontsource/inter";
+import "@fontsource/neuton";
+import "@fontsource/ibm-plex-mono";
+import "@fontsource/m-plus-1-code";
+
 const {
   title = SITE_TITLE,
   description = SITE_DESCRIPTION,
@@ -32,9 +39,11 @@ const {
   title={SITE_TITLE}
   href={new URL("rss.xml", Astro.site)}
 />
+
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
+
 <!-- <link -->
 <!--   rel="preload" -->
 <!--   href="/fonts/atkinson-regular.woff" -->

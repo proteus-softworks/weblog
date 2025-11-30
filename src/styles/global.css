@@ -140,9 +140,14 @@ hr {
 }
 
 .astro-code {
-    @apply p-4 tablet:p-6 rounded-md text-sm tablet:text-base;
-    font-family: var(--font-mono);
+  @apply p-4 tablet:p-6 rounded-md text-xs tablet:text-sm;
+  font-family: var(--font-mono);
 }
+
+/* .astro-code code { */
+/*   @apply text-xs tablet:text-base; */
+/*   font-family: var(--font-mono); */
+/* } */
 
 .ascii-cat {
   @apply font-console font-black;
