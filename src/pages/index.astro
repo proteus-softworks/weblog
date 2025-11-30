@@ -1,31 +1,24 @@
 ---
+export const prerender = true;
+
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import { cats } from "../content/ascii/cats";
+
+const catIdx = Math.floor(Math.random() * cats.length);
+const cat = cats[catIdx];
 
 const posts = (await getCollection("posts")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-
-const wooo = `
-⠀ ⠀   へ   ♡   ╱|、                 ╱|、
-     ૮  -   ՛ )      (\`   -  7               (˚ˎ 。7  
-       /   ⁻  ៸|       |、⁻〵              |、˜〵
- 乀 (ˍ, ل ل       じしˍ,)ノ       じしˍ,)ノ
-`;
 ---
 
 <Layout>
   <main class="laptop:pt-32 tablet:pt-6 pt-4">
-    <section class="flex items-end gap-4">
-      <h1 class="tablet:mb-4 mb-2 whitespace-nowrap">proteus softworks</h1>
-      <pre
-        class="font-console tablet:text-xs text-[0.5rem] font-black">
- ╱|、
-(˚ˎ 。7  
- |、˜〵          
-じしˍ,)ノ
-      </pre>
+    <section class="mb-8 flex items-end gap-4">
+      <h1 class="whitespace-nowrap">proteus softworks</h1>
+      <pre class="ascii-cat">{cat}</pre>
     </section>
 
     <section>

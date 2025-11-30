@@ -6,11 +6,13 @@
   --font-workbench: 'Workbench', 'monospace';
   --font-neuton: 'Neuton', 'serif';
   --font-ibm-plex: 'IBM Plex Mono', 'monospace';
+  --font-m-plus-1-code: 'M PLUS 1 Code', 'monospace';
 
   --font-console: var(--font-workbench);
   --font-sans: var(--font-inter);
   --font-serif: var(--font-neuton);
-  --font-mono: var(--ibm-plex);
+  --font-mono: var(--font-ibm-plex);
+  --font-intl-mono: var(--font-m-plus-1-code);
 
   --color-base-100: oklch(30.33% 0.016 252.42);
   --color-base-200: oklch(25.26% 0.014 253.1);
@@ -138,4 +140,8 @@ hr {
 .astro-code {
     @apply p-4 tablet:p-6 rounded-md text-sm tablet:text-base;
     font-family: var(--font-mono);
+}
+
+.ascii-cat {
+  @apply font-console text-xs font-black;
 }
