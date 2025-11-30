@@ -15,15 +15,19 @@ const posts = (await getCollection("posts")).sort(
 
 type FunFact = [string, string];
 const funFacts: FunFact[] = [
-  ["Editor of choice", "Emacs"],
-  ["Favorite animal", "Cats"],
+  ["Editor of choice", "GNU Emacs"],
+  ["Favorite animal", "Cat  —  (•˕ •マ"],
   ["This site is built with", "Astro.js"],
   ["Favorite language", "Elixir"],
+  ["Number of cats at home", "3"],
+  ["Currently playing", "Hollow Knight: Silksong"],
+  ["Favorite veggie burger", "Garten — Severna Park"],
+  ["Residing in", "Washington, DC"],
 ];
 const funFact = ArrayService.randomElement(funFacts);
 ---
 
-<Layout>
+<Layout header={false}>
   <main class="laptop:pt-16 tablet:pt-6 pt-4">
     <section class="mb-8">
       <div class="flex items-end gap-4">
