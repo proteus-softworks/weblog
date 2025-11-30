@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import Prose from "../components/Prose.astro";
 
 type Props = CollectionEntry<"posts">["data"];
 
@@ -19,13 +20,14 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
             )
           }
         </div>
-        <div class="prose">
-          <div>
-            <h1>{title}</h1>
-            <hr class="my-4" />
-          </div>
-          <slot />
+
+        <div>
+          <h1>{title}</h1>
+          <hr class="my-4" />
         </div>
+        <Prose>
+          <slot />
+        </Prose>
       </article>
     </main>
   </body>

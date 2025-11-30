@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin '@tailwindcss/typography';
 
 @theme {
   --font-inter: 'Inter', 'sans-serif';
@@ -133,10 +134,6 @@ hr {
   box-shadow: var(--box-shadow);
 }
 
-.prose p {
-  @apply leading-[1.6rem] tablet:leading-[2rem] pb-[1rem] tablet:pb-[2rem];
-}
-
 .astro-code {
     @apply p-4 tablet:p-6 rounded-md text-sm tablet:text-base;
     font-family: var(--font-mono);
@@ -144,4 +141,16 @@ hr {
 
 .ascii-cat {
   @apply font-console text-xs font-black;
+}
+
+.my-prose {
+   @apply
+   prose-invert
+   prose-p:leading-[1.6rem]
+   tablet:prose-p:leading-[2rem]
+   prose-p:pb-[1rem]
+   tablet:prose-p:pb-[2rem]
+   prose-a:underline
+   /* prose-p:text-justify */
+   prose-img:rounded-xl;
 }

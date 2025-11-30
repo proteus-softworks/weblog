@@ -5,20 +5,36 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import { cats } from "../content/ascii/cats";
+import { ArrayService } from "../services/array";
 
-const catIdx = Math.floor(Math.random() * cats.length);
-const cat = cats[catIdx];
+const cat = ArrayService.randomElement(cats);
 
 const posts = (await getCollection("posts")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+type FunFact = [string, string];
+const funFacts: FunFact[] = [
+  ["Editor of choice", "Emacs"],
+  ["Favorite animal", "Cats"],
+  ["This site is built with", "Astro.js"],
+  ["Favorite language", "Elixir"],
+];
+const funFact = ArrayService.randomElement(funFacts);
 ---
 
 <Layout>
   <main class="laptop:pt-32 tablet:pt-6 pt-4">
-    <section class="mb-8 flex items-end gap-4">
-      <h1 class="whitespace-nowrap">proteus softworks</h1>
-      <pre class="ascii-cat">{cat}</pre>
+    <section class="mb-8">
+      <div class="flex items-end gap-4">
+        <h1 class="whitespace-nowrap">proteus softworks</h1>
+        <pre class="ascii-cat">{cat}</pre>
+      </div>
+      <p class="font-console">a.k.a. brandon wetzel</p>
+      <dl class="mt-2 space-x-1 text-sm">
+        <dt class="float-left font-bold">{funFact[0]}:</dt>
+        <dd>{funFact[1]}</dd>
+      </dl>
     </section>
 
     <section>
