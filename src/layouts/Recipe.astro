@@ -2,12 +2,12 @@
 import type { CollectionEntry } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 
-type Props = CollectionEntry<"recipe">["data"];
+type Props = CollectionEntry<"recipes">["data"];
 
 const { title, ingredients, cookwares, steps, metadata } = Astro.props;
 
 // Filter out title from metadata since we display it separately
-const { title: _, ...otherMetadata } = metadata;
+const { title: _, ...otherMetadata } = metadata!;
 const metadataEntries = Object.entries(otherMetadata);
 ---
 
@@ -36,17 +36,19 @@ const metadataEntries = Object.entries(otherMetadata);
           <div class="recipe-content">
             <aside class="recipe-sidebar">
               {
-                ingredients.length > 0 && (
+                ingredients && ingredients.length > 0 && (
                   <section class="ingredients">
                     <h2>Ingredients</h2>
                     <ul>
-                      {ingredients.map((ing) => (
+                      {ingredients.map((ingredient) => (
                         <li>
-                          {ing.quantity && (
-                            <span class="quantity">{ing.quantity}</span>
+                          {ingredient.quantity && (
+                            <span class="quantity">{ingredient.quantity}</span>
                           )}
-                          {ing.units && <span class="units">{ing.units}</span>}
-                          <span class="name">{ing.name}</span>
+                          {ingredient.units && (
+                            <span class="units">{ingredient.units}</span>
+                          )}
+                          <span class="name">{ingredient.name}</span>
                         </li>
                       ))}
                     </ul>
@@ -55,7 +57,7 @@ const metadataEntries = Object.entries(otherMetadata);
               }
 
               {
-                cookwares.length > 0 && (
+                cookwares && cookwares.length > 0 && (
                   <section class="cookware">
                     <h2>Cookware</h2>
                     <ul>
@@ -77,28 +79,29 @@ const metadataEntries = Object.entries(otherMetadata);
               <h2>Instructions</h2>
               <ol>
                 {
-                  steps.map((step) => (
-                    <li>
-                      {step.map((part) => {
-                        if (part.type === "text") {
-                          return part.value;
-                        }
-                        if (part.type === "ingredient") {
-                          return <mark class="ingredient">{part.name}</mark>;
-                        }
-                        if (part.type === "cookware") {
-                          return <mark class="cookware">{part.name}</mark>;
-                        }
-                        if (part.type === "timer") {
-                          const duration = part.quantity
-                            ? `${part.quantity} ${part.units || ""}`.trim()
-                            : part.name;
-                          return <mark class="timer">{duration}</mark>;
-                        }
-                        return null;
-                      })}
-                    </li>
-                  ))
+                  steps &&
+                    steps.map((step) => (
+                      <li>
+                        {step.map((part) => {
+                          if (part.type === "text") {
+                            return part.value;
+                          }
+                          if (part.type === "ingredient") {
+                            return <mark class="ingredient">{part.name}</mark>;
+                          }
+                          if (part.type === "cookware") {
+                            return <mark class="cookware">{part.name}</mark>;
+                          }
+                          if (part.type === "timer") {
+                            const duration = part.quantity
+                              ? `${part.quantity} ${part.units || ""}`.trim()
+                              : part.name;
+                            return <mark class="timer">{duration}</mark>;
+                          }
+                          return null;
+                        })}
+                      </li>
+                    ))
                 }
               </ol>
             </section>

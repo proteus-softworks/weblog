@@ -9,12 +9,55 @@ const shoppingItemSchema = z.object({
   synonym: z.string().optional(),
 });
 
+const ingredientSchema = z.object({
+  type: z.literal("ingredient"),
+  name: z.string(),
+  quantity: z.union([z.string(), z.number()]),
+  units: z.string(),
+  preparation: z.string().optional(),
+  step: z.number().optional(),
+});
+
+const cookwareSchema = z.object({
+  type: z.literal("cookware"),
+  name: z.string(),
+  quantity: z.union([z.string(), z.number()]),
+  step: z.number().optional(),
+});
+
+const timerSchema = z.object({
+  type: z.literal("timer"),
+  name: z.string().optional(),
+  quantity: z.union([z.string(), z.number()]),
+  units: z.string(),
+});
+
+const textSchema = z.object({
+  type: z.literal("text"),
+  value: z.string(),
+});
+
+const stepSchema = z.array(
+  z.discriminatedUnion("type", [
+    ingredientSchema,
+    cookwareSchema,
+    timerSchema,
+    textSchema,
+  ]),
+);
+
+const metadataSchema = z
+  .object({
+    title: z.string().optional(),
+  })
+  .catchall(z.string());
+
 const recipeSchema = z.object({
   title: z.string(),
-  ingredients: z.array(z.any()).default([]),
-  cookwares: z.array(z.any()).default([]),
-  metadata: z.record(z.string()).default({}),
-  steps: z.array(z.array(z.any())).default([]),
+  ingredients: z.array(ingredientSchema).default([]),
+  cookwares: z.array(cookwareSchema).default([]),
+  metadata: metadataSchema.default({}),
+  steps: z.array(stepSchema).default([]),
   shoppingList: z.record(shoppingItemSchema).optional(),
 });
 
@@ -26,7 +69,7 @@ function parseRecipe(content: string, id: string) {
   const recipe = new Recipe(content);
   return {
     id,
-    title: (recipe.metadata.title as string) || id,
+    title: recipe.metadata.title || id,
     ingredients: recipe.ingredients,
     cookwares: recipe.cookwares,
     metadata: recipe.metadata,
