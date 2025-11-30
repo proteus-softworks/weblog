@@ -6,10 +6,28 @@ import Layout from "../layouts/Layout.astro";
 const posts = (await getCollection("posts")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const wooo = `
+⠀ ⠀   へ   ♡   ╱|、                 ╱|、
+     ૮  -   ՛ )      (\`   -  7               (˚ˎ 。7  
+       /   ⁻  ៸|       |、⁻〵              |、˜〵
+ 乀 (ˍ, ل ل       じしˍ,)ノ       じしˍ,)ノ
+`;
 ---
 
 <Layout>
-  <main>
+  <main class="pt-32">
+    <section class="flex items-center gap-4">
+      <h1 class="mb-4">proteus softworks</h1>
+      <pre
+        class="font-console text-xs font-black">
+ ╱|、
+(˚ˎ 。7  
+ |、˜〵          
+じしˍ,)ノ
+      </pre>
+    </section>
+
     <section>
       <ul>
         {
