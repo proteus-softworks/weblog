@@ -14,7 +14,7 @@ const posts = (await getCollection("posts")).sort(
       <ul>
         {
           posts.map((post) => (
-            <li>
+            <li class="mt-4">
               <a href={`/posts/${post.id}`}>
                 {post.data.heroImage && (
                   <Image
@@ -26,7 +26,7 @@ const posts = (await getCollection("posts")).sort(
                 )}
                 <h4>{post.data.title}</h4>
               </a>
-              <p>{post.data.description}</p>
+              <p class="text-base-dim-content">{post.data.description}</p>
             </li>
           ))
         }

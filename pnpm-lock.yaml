@@ -23,6 +23,18 @@ importers:
       '@cooklang/cooklang-ts':
         specifier: ^1.2.8
         version: 1.2.8
+      '@fontsource/inter':
+        specifier: ^5.2.8
+        version: 5.2.8
+      '@fontsource/neuton':
+        specifier: ^5.2.7
+        version: 5.2.7
+      '@fontsource/sixtyfour-convergence':
+        specifier: ^5.2.10
+        version: 5.2.10
+      '@fontsource/workbench':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@tailwindcss/vite':
         specifier: ^4.1.17
         version: 4.1.17(vite@6.4.1(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1))
@@ -274,6 +286,18 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource/inter@5.2.8':
+    resolution: {integrity: sha512-P6r5WnJoKiNVV+zvW2xM13gNdFhAEpQ9dQJHt3naLvfg+LkF2ldgSLiF4T41lf1SQCM9QmkqPTn4TH568IRagg==}
+
+  '@fontsource/neuton@5.2.7':
+    resolution: {integrity: sha512-5XYm0eAoFFxdTmVpyWNnnLu/tW2h6jkhnx8MjGSpNgCcDBxKbc025pZXNPeqrXIJMM8khyQmpzQ1s3522V0BTQ==}
+
+  '@fontsource/sixtyfour-convergence@5.2.10':
+    resolution: {integrity: sha512-HwJNN87ZKpp8rlj+cBl8plwz1Nfd8X7uqrAZI8ZbZS20O2+ZnJvJiYV47Jrt7trhEiiIMaODghyYX6jpA4VjtQ==}
+
+  '@fontsource/workbench@5.2.8':
+    resolution: {integrity: sha512-XNNauf1eU26G/IAoDyQlk9XwZ4jbySrdfcFUVOubkESVtKWF2QoCrQ/9rtwsPTIg+Q6hC6NaT93TP1M8Cb2rjQ==}
 
   '@img/colour@1.0.0':
     resolution: {integrity: sha512-A5P/LfWGFSl6nsckYtjw9da+19jB8hkJ6ACTGcDfEJ0aE+l2n2El7dsVM7UVHZQ9s2lmYMWlrS21YLy2IR1LUw==}
@@ -2285,6 +2309,14 @@ snapshots:
 
   '@esbuild/win32-x64@0.25.12':
     optional: true
+
+  '@fontsource/inter@5.2.8': {}
+
+  '@fontsource/neuton@5.2.7': {}
+
+  '@fontsource/sixtyfour-convergence@5.2.10': {}
+
+  '@fontsource/workbench@5.2.8': {}
 
   '@img/colour@1.0.0': {}
 

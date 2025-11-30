@@ -1,13 +1,113 @@
-/* @import "tailwindcss"; */
+@import "tailwindcss";
+
+@theme {
+  --font-inter: 'Inter', 'sans-serif';
+  --font-sixtyfour: 'Sixtyfour Convergence', 'sans-serif';
+  --font-workbench: 'Workbench', 'monospace';
+  --font-neuton: 'Neuton', 'serif';
+
+  --font-console: var(--font-workbench);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-neuton);
+
+  --color-base-100: oklch(30.33% 0.016 252.42);
+  --color-base-200: oklch(25.26% 0.014 253.1);
+  --color-base-300: oklch(20.15% 0.012 254.09);
+  --color-base-content: oklch(97.807% 0.029 256.847);
+  --color-base-dim-content: oklch(80% 0.014 253.09);
+  --color-primary: oklch(58% 0.233 278.117);
+  --color-primary-content: oklch(96% 0.018 272.314);
+  --color-secondary: oklch(58% 0.233 277.117);
+  --color-secondary-content: oklch(96% 0.018 272.314);
+  --color-accent: oklch(60% 0.25 292.717);
+  --color-accent-content: oklch(96% 0.016 293.756);
+  --color-neutral: oklch(37% 0.044 257.287);
+  --color-neutral-content: oklch(98% 0.003 247.858);
+  --color-info: oklch(58% 0.158 241.966);
+  --color-info-content: oklch(97% 0.013 236.62);
+  --color-success: oklch(60% 0.118 184.704);
+  --color-success-content: oklch(98% 0.014 180.72);
+  --color-warning: oklch(66% 0.179 58.318);
+  --color-warning-content: oklch(98% 0.022 95.277);
+  --color-error: oklch(58% 0.253 17.585);
+  --color-error-content: oklch(96% 0.015 12.422);
+
+  --color-background:var(--color-base-300);
+
+  --comfortable-width: 720px; 
+
+  --radius-selector: 0.25rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.21875rem;
+  --size-field: 0.21875rem;
+  --border: 1.5px;
+  --depth: 1;
+  --noise: 0;
+}
 
 /******************************************************************************
  * HTML Elements
  ******************************************************************************/
+
+* {
+  line-height: inherit;
+}
+
+body {
+  color: var(--color-base-content);
+  background-color: var(--color-background);
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  /* letter-spacing: 0.06rem; */
+}
+
 main {
-  width: 960px;
+  width: var(--comfortable-width);
   max-width: calc(100% - 2em);
   margin: 0 auto;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-console);
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+hr {
+    opacity: 20%;
+    border-width: 1px;
+}
+
+
 
 /******************************************************************************
  * Classes
@@ -24,10 +124,6 @@ main {
   box-shadow: var(--box-shadow);
 }
 
-.prose {
-  width: 720px;
-  max-width: calc(100% - 2em);
-  margin: auto;
-  padding: 1em;
-  color: rgb(var(--gray-dark));
+.prose p {
+  padding-bottom: 1rem; 
 }
