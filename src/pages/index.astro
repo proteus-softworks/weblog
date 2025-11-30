@@ -41,8 +41,8 @@ const funFact = ArrayService.randomElement(funFacts);
       <ul>
         {
           posts.map((post) => (
-            <li class="mt-4">
-              <a href={`/posts/${post.id}`}>
+            <a href={`/posts/${post.id}`}>
+              <li class="mt-4">
                 {post.data.heroImage && (
                   <Image
                     width={720}
@@ -52,9 +52,10 @@ const funFact = ArrayService.randomElement(funFacts);
                   />
                 )}
                 <h4>{post.data.title}</h4>
-              </a>
-              <p class="text-base-dim-content">{post.data.description}</p>
-            </li>
+
+                <p class="text-base-dim-content">{post.data.description}</p>
+              </li>
+            </a>
           ))
         }
       </ul>
