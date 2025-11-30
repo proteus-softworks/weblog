@@ -45,4 +45,5 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             cd /opt/apps
+            docker pull weblog
             docker compose up -d weblog
