@@ -24,11 +24,14 @@ const funFact = ArrayService.randomElement(funFacts);
 ---
 
 <Layout>
-  <main class="laptop:pt-32 tablet:pt-6 pt-4">
+  <main class="laptop:pt-16 tablet:pt-6 pt-4">
     <section class="mb-8">
       <div class="flex items-end gap-4">
-        <h1 class="whitespace-nowrap">proteus softworks</h1>
-        <pre class="ascii-cat">{cat}</pre>
+        <h1 class="whitespace-nowrap text-shadow-(--white-glow)">
+          proteus softworks
+        </h1>
+        <pre
+          class="ascii-cat tablet:text-xs text-[0.6rem] text-shadow-(--white-glow-lg)">{cat}</pre>
       </div>
       <p class="font-console">a.k.a. brandon wetzel</p>
       <dl class="mt-2 space-x-1 text-sm">
@@ -37,7 +40,10 @@ const funFact = ArrayService.randomElement(funFacts);
       </dl>
     </section>
 
+    <hr class="my-4" />
+
     <section>
+      <h3 class="underline">Latest Posts</h3>
       <ul>
         {
           posts.map((post) => (
@@ -51,9 +57,12 @@ const funFact = ArrayService.randomElement(funFacts);
                     alt=""
                   />
                 )}
-                <h4>{post.data.title}</h4>
+                <h5>{post.data.title}</h5>
 
-                <p class="text-base-dim-content">{post.data.description}</p>
+                <p class="text-base-dim-content font-mono text-sm">
+                  {"> "}
+                  {post.data.description}
+                </p>
               </li>
             </a>
           ))

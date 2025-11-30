@@ -8,6 +8,13 @@ import "@fontsource/ibm-plex-mono";
 import "@fontsource/m-plus-1-code";
 
 import BaseHead from "../components/BaseHead.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+
+interface Props {
+  header?: boolean;
+}
+
+const { header = true } = Astro.props;
 ---
 
 <!doctype html>
@@ -16,6 +23,7 @@ import BaseHead from "../components/BaseHead.astro";
     <BaseHead />
   </head>
   <body>
+    {!!header && <SiteHeader />}
     <slot />
   </body>
 </html>

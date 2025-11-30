@@ -1,0 +1,15 @@
+---
+export const prerender = false;
+
+import SiteLogo from "./SiteLogo.astro";
+---
+
+<header
+  class="bg-background laptop:h-[60px] fixed flex h-[40px] w-full items-center px-2"
+>
+  <a href="/">
+    <SiteLogo />
+  </a>
+</header>
+
+<div class="laptop:h-[60px] h-[40px]"></div>
