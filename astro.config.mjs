@@ -11,6 +11,7 @@ import node from "@astrojs/node";
 export default defineConfig({
   site: "https://weblog.proteus.works",
   integrations: [mdx(), sitemap()],
+  output: "static", // or 'server'
 
   vite: {
     plugins: [tailwindcss()],
