@@ -80,7 +80,7 @@ body {
 
 main {
   width: var(--comfortable-width);
-  max-width: calc(100% - 2em);
+  max-width: calc(100% - 4em);
   margin: 0 auto;
 }
 
