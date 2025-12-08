@@ -70,7 +70,7 @@
 
 body {
     @apply text-base tablet:text-lg;
-    color: #f9f9fb;
+    color: #f5f5f7;
   /* color: var(--color-base-content); */
   background-color: var(--color-background);
   font-family: var(--font-serif);
