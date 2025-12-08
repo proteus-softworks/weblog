@@ -1,4 +1,4 @@
 [submodule "src/content/weblog-docs"]
 	path = src/content/weblog-docs
 	url = git@github.com:proteus-softworks/weblog-docs.git
-    branch = main
+	branch = main
