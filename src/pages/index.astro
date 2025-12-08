@@ -9,7 +9,10 @@ import { ArrayService } from "../services/array";
 
 const cat = ArrayService.randomElement(cats);
 
-const posts = (await getCollection("posts")).sort(
+const regularPosts = await getCollection("posts");
+const obsidianPosts = await getCollection("obsidianPosts");
+
+const posts = [...regularPosts, ...obsidianPosts].sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
@@ -32,9 +35,7 @@ const funFact = ArrayService.randomElement(funFacts);
   <main class="pt-16">
     <section class="mb-8">
       <div class="flex items-end gap-4">
-        <h1 class="whitespace-nowrap">
-          proteus softworks
-        </h1>
+        <h1 class="whitespace-nowrap">proteus softworks</h1>
         <pre
           class="ascii-cat tablet:text-xs text-[0.6rem] text-shadow-(--white-glow-lg)">{cat}</pre>
       </div>
@@ -64,10 +65,12 @@ const funFact = ArrayService.randomElement(funFacts);
                 )}
                 <h5>{post.data.title}</h5>
 
-                <p class="text-base-dim-content font-mono text-sm">
-                  {"> "}
-                  {post.data.description}
-                </p>
+                {post.data.description && (
+                  <p class="text-base-dim-content font-mono text-sm">
+                    {"> "}
+                    {post.data.description}
+                  </p>
+                )}
               </li>
             </a>
           ))

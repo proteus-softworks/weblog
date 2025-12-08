@@ -69,8 +69,8 @@
 }
 
 body {
-    @apply text-base tablet:text-lg;
-    color: #f5f5f7;
+  @apply text-base tablet:text-lg;
+  color: #f5f5f7;
   /* color: var(--color-base-content); */
   background-color: var(--color-background);
   font-family: var(--font-serif);
@@ -80,7 +80,7 @@ body {
 
 main {
   width: var(--comfortable-width);
-  max-width: calc(100% - 3rem);
+  @apply max-w-[calc(100%_-_2rem)] tablet:max-w-[calc(100%_-_3rem)];
   margin: 0 auto;
 }
 

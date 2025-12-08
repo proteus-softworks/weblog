@@ -4,12 +4,13 @@ import BlogPost from "../../layouts/BlogPost.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
-  return posts.map((post) => ({
+  const obsidianPosts = await getCollection("obsidianPosts");
+  return [...posts, ...obsidianPosts].map((post) => ({
     params: { slug: post.id },
     props: post,
   }));
 }
-type Props = CollectionEntry<"posts">;
+type Props = CollectionEntry<"posts"> | CollectionEntry<"obsidianPosts">;
 
 const post = Astro.props;
 const { Content } = await render(post);
