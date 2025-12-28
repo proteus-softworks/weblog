@@ -1,5 +1,8 @@
 ---
 export const prerender = false;
+import { cats } from "../content/ascii/cats";
+import { ArrayService } from "../services/array";
+const cat = ArrayService.randomElement(cats);
 
 import SiteLogo from "./SiteLogo.astro";
 ---
@@ -7,8 +10,10 @@ import SiteLogo from "./SiteLogo.astro";
 <header
   class="bg-background laptop:h-[60px] fixed flex h-[40px] w-full items-center px-2"
 >
-  <a href="/">
+  <a href="/" class="flex gap-2">
     <SiteLogo />
+    <pre
+      class="ascii-cat text-base-dim-content text-[0.3rem] font-black text-shadow-(--white-glow-lg)">{cat}</pre>
   </a>
 </header>
 

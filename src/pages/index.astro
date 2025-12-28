@@ -4,17 +4,30 @@ export const prerender = false;
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import { cats } from "../content/ascii/cats";
 import { ArrayService } from "../services/array";
-
-const cat = ArrayService.randomElement(cats);
 
 const regularPosts = await getCollection("posts");
 const obsidianPosts = await getCollection("obsidianPosts");
 
-const posts = [...regularPosts, ...obsidianPosts].sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = [...regularPosts, ...obsidianPosts]
+  .filter(
+    (post) =>
+      post.data.updatedDate?.valueOf() ||
+      post.data.pubDate?.valueOf() ||
+      post.data.draftDate?.valueOf(),
+  )
+  .sort((a, b) => {
+    const aDate =
+      a.data.updatedDate?.valueOf() ??
+      a.data.pubDate?.valueOf() ??
+      a.data.draftDate?.valueOf();
+    const bDate =
+      b.data.updatedDate?.valueOf() ??
+      b.data.pubDate?.valueOf() ??
+      b.data.draftDate?.valueOf();
+
+    return bDate - aDate;
+  });
 
 type FunFact = [string, string];
 const funFacts: FunFact[] = [
@@ -34,12 +47,16 @@ const funFact = ArrayService.randomElement(funFacts);
 <Layout header={false}>
   <main class="pt-16">
     <section class="mb-8">
-      <div class="flex items-end gap-4">
-        <h1 class="whitespace-nowrap">proteus softworks</h1>
-        <pre
-          class="ascii-cat tablet:text-xs text-[0.6rem] text-shadow-(--white-glow-lg)">{cat}</pre>
+      <div class="flex items-center gap-4">
+        <img
+          class="h-16 w-16 rounded-full"
+          src="https://static.proteus.works/beanie.jpg"
+        />
+        <div>
+          <h1 class="whitespace-nowrap">proteus softworks</h1>
+          <p class="font-console">a.k.a. brandon wetzel</p>
+        </div>
       </div>
-      <p class="font-console">a.k.a. brandon wetzel</p>
       <dl class="mt-2 space-x-1 text-sm">
         <dt class="float-left font-bold">{funFact[0]}:</dt>
         <dd>{funFact[1]}</dd>

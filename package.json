@@ -28,6 +28,7 @@
     "vite-plugin-wasm": "^3.5.0"
   },
   "devDependencies": {
+    "@astrojs/language-server": "^2.16.2",
     "@tailwindcss/typography": "^0.5.19",
     "prettier": "3.7.3",
     "prettier-plugin-astro": "0.14.1",
