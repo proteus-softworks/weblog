@@ -1,0 +1,14 @@
+---
+const response = await fetch("https://randomuser.me/api/");
+const data = await response.json();
+const randomUser = data.results[0];
+const avatarURL = randomUser.picture.large;
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<img alt="User avatar" src={avatarURL} class={[className ?? ""]} />
