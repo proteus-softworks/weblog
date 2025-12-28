@@ -13,7 +13,7 @@ import icon from "astro-icon";
 export default defineConfig({
   site: "https://weblog.proteus.works",
   integrations: [mdx(), sitemap(), icon()],
-  output: "server", // or "static"
+  output: "static", // or 'server'
 
   vite: {
     plugins: [tailwindcss()],
