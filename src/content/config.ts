@@ -16,7 +16,7 @@ const postsCollection = defineCollection({
 });
 
 const obsidianPostsCollection = defineCollection({
-  loader: glob({ base: "./src/content/weblog-docs", pattern: "**/*.md" }),
+  loader: glob({ base: "./src/content/weblog-docs", pattern: "**/*.{md,mdx}" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
