@@ -1,0 +1,48 @@
+---
+export const prerender = false;
+
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+
+const regularPosts = await getCollection("posts");
+const obsidianPosts = await getCollection("obsidianPosts");
+
+const posts = [...regularPosts, ...obsidianPosts]
+  .filter((post) => post.data.draftDate?.valueOf())
+  .sort((a, b) => b.data.draftDate.valueOf() - a.data.draftDate.valueOf());
+---
+
+<Layout header={false}>
+  <main class="pt-16">
+    <section>
+      <h3 class="underline">Draft Posts</h3>
+      <ul>
+        {
+          posts.map((post) => (
+            <a href={`/posts/${post.id}`}>
+              <li class="mt-4">
+                {post.data.heroImage && (
+                  <Image
+                    width={720}
+                    height={360}
+                    src={post.data.heroImage}
+                    alt=""
+                  />
+                )}
+                <h5>{post.data.title}</h5>
+
+                {post.data.description && (
+                  <p class="text-base-dim-content font-mono text-sm">
+                    {"> "}
+                    {post.data.description}
+                  </p>
+                )}
+              </li>
+            </a>
+          ))
+        }
+      </ul>
+    </section>
+  </main>
+</Layout>

@@ -11,20 +11,11 @@ const obsidianPosts = await getCollection("obsidianPosts");
 
 const posts = [...regularPosts, ...obsidianPosts]
   .filter(
-    (post) =>
-      post.data.updatedDate?.valueOf() ||
-      post.data.pubDate?.valueOf() ||
-      post.data.draftDate?.valueOf(),
+    (post) => post.data.updatedDate?.valueOf() || post.data.pubDate?.valueOf(),
   )
   .sort((a, b) => {
-    const aDate =
-      a.data.updatedDate?.valueOf() ??
-      a.data.pubDate?.valueOf() ??
-      a.data.draftDate?.valueOf();
-    const bDate =
-      b.data.updatedDate?.valueOf() ??
-      b.data.pubDate?.valueOf() ??
-      b.data.draftDate?.valueOf();
+    const aDate = a.data.updatedDate?.valueOf() ?? a.data.pubDate?.valueOf();
+    const bDate = b.data.updatedDate?.valueOf() ?? b.data.pubDate?.valueOf();
 
     return bDate - aDate;
   });
