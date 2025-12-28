@@ -24,6 +24,14 @@ jobs:
 
       - name: Update submodules to latest remote
         run: git submodule update --init --recursive --remote
+        
+      - name: Convert all weblog docs to MDX
+        run: |
+          for f in src/content/weblog-docs/*.md; do
+            if [ -f "$f" ] && head -20 "$f" | grep -qE '^mdx:\s*true\s*$'; then
+              mv "$f" "${f%.md}.mdx"
+            fi
+          done
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
