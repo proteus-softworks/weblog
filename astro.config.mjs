@@ -8,9 +8,11 @@ import tailwindcss from "@tailwindcss/vite";
 
 import node from "@astrojs/node";
 
+import icon from "astro-icon";
+
 export default defineConfig({
   site: "https://weblog.proteus.works",
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap(), icon()],
   output: "static", // or 'server'
 
   vite: {

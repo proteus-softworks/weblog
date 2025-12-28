@@ -2,6 +2,7 @@
 export const prerender = false;
 
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import { ArrayService } from "../services/array";
@@ -17,7 +18,7 @@ const posts = [...regularPosts, ...obsidianPosts]
     const aDate = a.data.updatedDate?.valueOf() ?? a.data.pubDate?.valueOf();
     const bDate = b.data.updatedDate?.valueOf() ?? b.data.pubDate?.valueOf();
 
-    return bDate - aDate;
+    return bDate! - aDate!;
   });
 
 type FunFact = [string, string];
@@ -45,10 +46,28 @@ const funFact = ArrayService.randomElement(funFacts);
         />
         <div>
           <h1 class="whitespace-nowrap">proteus softworks</h1>
-          <p class="font-console">a.k.a. brandon wetzel</p>
+          <div class="flex items-center gap-2">
+            <p class="font-console">a.k.a. brandon wetzel</p>
+            <p class="font-console">|</p>
+
+            <a
+              href="https://github.com/mauzybwy"
+              class="text-base-dim-content"
+              target="_blank"
+            >
+              <Icon name="fa6-brands:github-alt" />
+            </a>
+            <a
+              href="https://bsky.app/profile/mauzy.bababooey.world"
+              class="text-base-dim-content"
+              target="_blank"
+            >
+              <Icon name="fa6-brands:bluesky" />
+            </a>
+          </div>
         </div>
       </div>
-      <dl class="mt-2 space-x-1 text-sm">
+      <dl class="mt-4 space-x-1 text-sm">
         <dt class="float-left font-bold">{funFact[0]}:</dt>
         <dd>{funFact[1]}</dd>
       </dl>
