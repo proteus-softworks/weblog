@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import Layout from "../layouts/Layout.astro";
 import Avatar from "../components/RandomAvatar.astro";
 ---
@@ -13,6 +15,7 @@ import Avatar from "../components/RandomAvatar.astro";
       <Avatar server:defer class="h-16 w-16">
         <div slot="fallback" class="bg-base-100 h-16 w-16"></div>
       </Avatar>
+      <Avatar class="h-16 w-16" />
     </section>
   </main>
 </Layout>
