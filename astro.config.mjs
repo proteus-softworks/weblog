@@ -12,13 +12,7 @@ import icon from "astro-icon";
 
 export default defineConfig({
   site: "https://weblog.proteus.works",
-  integrations: [
-    mdx({
-      extensions: ['.md', '.mdx']
-    }),
-    sitemap(),
-    icon()
-  ],
+  integrations: [mdx(), sitemap(), icon()],
   output: "static", // or 'server'
 
   vite: {
