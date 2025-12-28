@@ -10,7 +10,7 @@ const obsidianPosts = await getCollection("obsidianPosts");
 
 const posts = [...regularPosts, ...obsidianPosts]
   .filter((post) => post.data.draftDate?.valueOf())
-  .sort((a, b) => b.data.draftDate.valueOf() - a.data.draftDate.valueOf());
+  .sort((a, b) => b.data.draftDate!.valueOf() - a.data.draftDate!.valueOf());
 ---
 
 <Layout header={false}>
