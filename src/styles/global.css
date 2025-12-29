@@ -190,7 +190,7 @@ hr {
 }
 
 .my-prose blockquote {
-    @apply text-base-dim-content italic border-l-2 pl-4;
+    @apply text-base-dim-content text-base italic border-l-2 pl-4;
 }
 
 .blink {
