@@ -202,11 +202,11 @@ hr {
 }
 
 .my-prose li {
-    @apply mb-2 tablet:mb-1;
+    @apply mb-1;
 }
 
 .my-prose ul li:first-child {
-    @apply mt-2 tablet:mt-1;
+    @apply mt-1;
 }
 
 .my-prose li:not(.task-list-item) {
