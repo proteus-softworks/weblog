@@ -194,11 +194,11 @@ hr {
 }
 
 .my-prose > ul {
-    @apply ml-6 mb-4 tablet:mb-8;
+    @apply ml-7 mb-4 tablet:mb-8;
 }
 
 .my-prose ul ul {
-    @apply ml-6;
+    @apply ml-5 tablet:ml-6;
 }
 
 .my-prose li {
