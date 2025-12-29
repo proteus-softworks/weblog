@@ -126,10 +126,6 @@ hr {
  * Markdown Classes
  ******************************************************************************/
 
-.contains-task-list {
-    @apply mb-4 tablet:mb-8;
-}
-
 .task-list-item input:not(:checked) {
   appearance: none;
   @apply rounded-sm border-1 w-4 h-4 mr-1 border-base-dim-content;
@@ -191,6 +187,23 @@ hr {
 
 .my-prose blockquote {
     @apply text-base-dim-content text-base italic border-l-2 pl-4;
+}
+
+.my-prose > ul {
+    @apply mb-4 tablet:mb-8;
+}
+
+.my-prose li {
+    @apply leading-8;
+}
+
+.my-prose ul ul {
+    @apply ml-6;
+}
+
+.my-prose li:not(.task-list-item) {
+    list-style-type: disc;
+    @apply ml-6;
 }
 
 .blink {
