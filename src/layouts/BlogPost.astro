@@ -9,6 +9,28 @@ type Props = CollectionEntry<"posts">["data"];
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
+<script>
+  // This script runs on the client after the page loads.
+  function uncheckAllCheckboxes() {
+    // Select all input elements with the type "checkbox"
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    console.log(checkboxes);
+
+    // Loop through the NodeList and uncheck each one
+    checkboxes.forEach((checkbox) => {
+      (checkbox as HTMLInputElement).disabled = false;
+      (checkbox as HTMLInputElement).classList.add("my-disabled");
+    });
+  }
+
+  uncheckAllCheckboxes();
+
+  // document.addEventListener("astro:page-load", () => {
+  //   uncheckAllCheckboxes();
+  // });
+</script>
+
 <Layout>
   <body>
     <main class="pt-16">

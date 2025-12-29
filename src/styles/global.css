@@ -122,7 +122,26 @@ hr {
     border-width: 1px;
 }
 
+/******************************************************************************
+ * Markdown Classes
+ ******************************************************************************/
 
+.contains-task-list {
+    @apply mb-4 tablet:mb-8;
+}
+
+.task-list-item input:not(:checked) {
+  appearance: none;
+  @apply rounded-sm border-1 w-4 h-4 mr-1 border-base-dim-content;
+}
+
+.task-list-item input:checked {
+    @apply rounded-sm border-1 w-4 h-4 mr-1;
+}
+
+.my-disabled {
+    pointer-events: none;
+}
 
 /******************************************************************************
  * Classes
@@ -140,7 +159,7 @@ hr {
 }
 
 .astro-code {
-  @apply p-4 tablet:p-6 rounded-md text-xs tablet:text-sm;
+  @apply p-4 tablet:p-6 rounded-md text-xs tablet:text-sm mb-8 tablet:mb-8;
   font-family: var(--font-mono);
 }
 
@@ -156,13 +175,17 @@ hr {
 .my-prose {
    @apply
    prose-invert
-   prose-p:leading-[1.6rem]
-   tablet:prose-p:leading-[2rem]
-   prose-p:pb-[1rem]
-   tablet:prose-p:pb-[2rem]
+   prose-p:leading-6
+   tablet:prose-p:leading-8
+   prose-p:mb-4
+   tablet:prose-p:mb-8
    prose-a:underline
    /* prose-p:text-justify */
    prose-img:rounded-xl;
+}
+
+.my-prose blockquote {
+    @apply text-base-dim-content italic border-l-2 pl-4;
 }
 
 .blink {
