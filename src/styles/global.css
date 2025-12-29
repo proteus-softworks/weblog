@@ -127,7 +127,7 @@ hr {
  ******************************************************************************/
 
 .task-list-item input {
-    @apply w-4 h-4 mr-2 tablet:mr-3;
+    @apply w-4 h-4 mr-1 tablet:mr-2;
 }
 
 .task-list-item input:not(:checked) {
@@ -194,21 +194,25 @@ hr {
 }
 
 .my-prose > ul {
-    @apply mb-4 tablet:mb-8;
-}
-
-.my-prose li {
-    @apply mb-1;
+    @apply ml-6 mb-4 tablet:mb-8;
 }
 
 .my-prose ul ul {
     @apply ml-6;
 }
 
+.my-prose li {
+    @apply mb-1;
+}
+
 .my-prose li:not(.task-list-item) {
     list-style-type: disc;
-    list-style-position: inside;
-    margin-left: 0.25rem;
+    /* list-style-position: inside; */
+    /* margin-left: 0.25rem; */
+}
+
+.my-prose li.task-list-item > input {
+    @apply -ml-6 tablet:-ml-7;
 }
 
 .blink {
