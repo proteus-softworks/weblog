@@ -126,13 +126,17 @@ hr {
  * Markdown Classes
  ******************************************************************************/
 
+.task-list-item input {
+    @apply w-4 h-4 mr-2 tablet:mr-3;
+}
+
 .task-list-item input:not(:checked) {
-  appearance: none;
-  @apply rounded-sm border-1 w-4 h-4 mr-1 border-base-dim-content;
+  /* appearance: none; */
+  /* @apply rounded-sm border-1 border-base-dim-content; */
 }
 
 .task-list-item input:checked {
-    @apply rounded-sm border-1 w-4 h-4 mr-1;
+
 }
 
 .my-disabled {
@@ -203,7 +207,8 @@ hr {
 
 .my-prose li:not(.task-list-item) {
     list-style-type: disc;
-    @apply ml-6;
+    list-style-position: inside;
+    margin-left: 0.25rem;
 }
 
 .blink {
