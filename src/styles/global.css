@@ -184,6 +184,11 @@ hr {
    prose-img:rounded-xl;
 }
 
+.my-prose h1 {
+    /* We don't want h1's inside my-prose */
+    @apply text-error;
+}
+
 .my-prose blockquote {
     @apply text-base-dim-content italic border-l-2 pl-4;
 }
