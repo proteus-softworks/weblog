@@ -198,7 +198,7 @@ hr {
 }
 
 .my-prose li {
-    @apply leading-8;
+    @apply mb-1;
 }
 
 .my-prose ul ul {
