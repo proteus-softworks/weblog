@@ -127,7 +127,7 @@ hr {
  ******************************************************************************/
 
 .task-list-item input {
-    @apply w-4 h-4 mr-2 tablet:mr-2;
+    @apply w-4 h-4 mr-2;
 }
 
 .task-list-item input:not(:checked) {
