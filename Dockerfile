@@ -22,6 +22,9 @@ COPY mise.toml package.json pnpm-lock.yaml ./
 RUN mise trust
 RUN mise install
 
+RUN cp `which fnox` /usr/local/bin/fnox
+RUN cp `which node` /usr/local/bin/node
+
 # ---- Production dependencies ----
 FROM base AS prod-deps
 RUN pnpm fetch --prod
@@ -35,13 +38,14 @@ RUN pnpm install --offline
 # ---- Build ----
 FROM build-deps AS build
 COPY . .
-RUN fnox exec -- pnpm run build
+RUN pnpm run build
 
 # ---- Runtime ----
-FROM node:lts-slim AS runtime
+FROM debian:12-slim AS runtime
 WORKDIR /app
 
-COPY --from=base /mise/shims/fnox /usr/local/bin/fnox
+COPY --from=base /usr/local/bin/node /usr/local/bin/node
+COPY --from=base /usr/local/bin/fnox /usr/local/bin/fnox
 
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist

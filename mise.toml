@@ -70,3 +70,9 @@ description = "Watch prod logs"
 run="""
 mise prod:ssh 'docker compose --project-directory "/opt/apps" logs -f weblog'
 """
+
+[tasks."prod:restart"]
+description = "Restart prod app"
+run="""
+mise prod:ssh 'docker compose --project-directory "/opt/apps" restart weblog'
+"""
