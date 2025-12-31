@@ -1,17 +1,31 @@
-# ---- Base image ----
-FROM node:lts AS base
+# ---- Base image with mise ----
+FROM debian:12-slim AS base
+
+RUN apt-get update \
+    && apt-get -y --no-install-recommends install curl ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set up Mise tooling
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ENV MISE_DATA_DIR="/mise"
+ENV MISE_CONFIG_DIR="/mise"
+ENV MISE_CACHE_DIR="/mise/cache"
+ENV MISE_INSTALL_PATH="/usr/local/bin/mise"
+ENV PATH="/mise/shims:$PATH"
+
+RUN curl https://mise.run | sh
+
 WORKDIR /app
 
-# Install pnpm globally
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Copy mise config and install tools
+COPY .mise.toml ./
+RUN mise install
 
 COPY package.json pnpm-lock.yaml ./
 
 # ---- Production dependencies ----
 FROM base AS prod-deps
-# Fetch all dependencies to pnpm store (no install yet)
 RUN pnpm fetch --prod
-# Install ONLY prod deps from the store
 RUN pnpm install --offline --prod
 
 # ---- Build dependencies ----
@@ -22,21 +36,19 @@ RUN pnpm install --offline
 # ---- Build ----
 FROM build-deps AS build
 COPY . .
-RUN pnpm run build
+RUN fnox exec -- pnpm run build
 
 # ---- Runtime ----
-FROM node:lts AS runtime
+FROM node:lts-slim AS runtime
 WORKDIR /app
-RUN corepack enable && corepack prepare pnpm@latest --activate
 
-# Copy production node_modules
+COPY --from=base /mise/shims/fnox /usr/local/bin/fnox
+
 COPY --from=prod-deps /app/node_modules ./node_modules
-
-# Copy built dist
 COPY --from=build /app/dist ./dist
 
 ENV HOST=0.0.0.0
 ENV PORT=4321
 EXPOSE 4321
 
-CMD ["node", "./dist/server/entry.mjs"]
+CMD ["fnox", "exec", "--", "node", "./dist/server/entry.mjs"]
