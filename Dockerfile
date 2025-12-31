@@ -55,10 +55,12 @@ ENV PATH="/mise/shims:$PATH"
 
 RUN curl https://mise.run | sh
 
-COPY --from=base /app/mise.toml /app/fnox.toml ./
+COPY --from=base /app/mise.toml ./mise.toml
 
 RUN mise trust
 RUN mise install
+
+COPY --from=base /app/fnox.toml ./fnox.toml
 
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
