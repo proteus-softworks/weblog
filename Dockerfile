@@ -1,6 +1,8 @@
 # ---- Mise installer ----
 FROM debian:12-slim AS mise-base
 
+WORKDIR /app
+
 RUN apt-get update \
     && apt-get -y --no-install-recommends install curl ca-certificates \
     && rm -rf /var/lib/apt/lists/*
@@ -14,14 +16,14 @@ ENV PATH="/mise/shims:$PATH"
 
 RUN curl https://mise.run | sh
 
+COPY mise.toml fnox.toml ./
+
+RUN mise trust && mise install
+
 # ---- Base image with tools installed ----
 FROM mise-base AS base
 
-WORKDIR /app
-
-COPY mise.toml fnox.toml package.json pnpm-lock.yaml ./
-
-RUN mise trust && mise install
+COPY package.json pnpm-lock.yaml ./
 
 # ---- Production dependencies ----
 FROM base AS prod-deps
@@ -40,13 +42,7 @@ RUN fnox exec -- pnpm run build
 
 # ---- Runtime ----
 FROM mise-base AS runtime
-WORKDIR /app
 
-COPY --from=base /app/mise.toml ./mise.toml
-
-RUN mise trust && mise install
-
-COPY --from=base /app/fnox.toml ./fnox.toml
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 
