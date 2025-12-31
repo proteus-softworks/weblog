@@ -1,4 +1,7 @@
 import { visit, SKIP } from "unist-util-visit";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 
 export function remarkServerValues() {
   return (tree) => {
@@ -94,14 +97,31 @@ export function remarkServerValues() {
   };
 }
 
-export function remarkBacklinks() {
+export function remarkBacklinks(options = {}) {
+  const contentDir = options.contentDir || "src/content/posts";
+
+  // Build slug → title map once per build
+  const titleMap = new Map();
+
+  const postsPath = path.resolve(process.cwd(), contentDir);
+  if (fs.existsSync(postsPath)) {
+    for (const file of fs.readdirSync(postsPath)) {
+      if (!file.endsWith(".md") && !file.endsWith(".mdx")) continue;
+
+      const slug = file.replace(/\.mdx?$/, "");
+      const content = fs.readFileSync(path.join(postsPath, file), "utf-8");
+      const { data } = matter(content);
+
+      titleMap.set(slug, data.title || slug);
+    }
+  }
+
   return (tree) => {
+    // Matches [[slug]] or (custom text)[[slug]]
+    const regex = /(?:\(([^)]*)\))?\[\[([^\]]+)\]\]/g;
+
     visit(tree, "text", (node, index, parent) => {
-      const regex = /\(([^)]*)\)\[\[([^\]]*)\]\]/g;
-
-      if (!regex.test(node.value)) return;
-
-      regex.lastIndex = 0;
+      if (!node.value.includes("[[")) return;
 
       const children = [];
       let lastIndex = 0;
@@ -115,13 +135,21 @@ export function remarkBacklinks() {
           });
         }
 
+        const customText = match[1];
+        const slug = match[2];
+        const title = customText || titleMap.get(slug) || slug;
+
         children.push({
           type: "html",
-          value: `<a href="${match[2]}">${match[1]}</a>`,
+          value: `<a href="/posts/${slug}">${title}</a>`,
         });
 
         lastIndex = match.index + match[0].length;
       }
+
+      regex.lastIndex = 0;
+
+      if (children.length === 0) return;
 
       if (lastIndex < node.value.length) {
         children.push({
