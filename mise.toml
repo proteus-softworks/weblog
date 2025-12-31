@@ -1,4 +1,6 @@
 [tools]
+age = "latest"
+"github:jdx/fnox" = "latest"
 pnpm = "10.24"
 
 [env]
@@ -6,7 +8,7 @@ PROJECT = "weblog"
 
 [tasks.astro]
 description = "Start dev server"
-run = "pnpm astro"
+run = "fnox exec -- pnpm astro"
 
 [tasks.dev]
 description = "Start dev server"
@@ -28,7 +30,15 @@ run = "pnpm install"
 description = "Format files"
 run = "pnpm prettier --write ."
 
-[tasks.scp]
+[tasks.recrypt]
+description = "Re-encrypt secrets"
+run = """
+fnox list | awk '/provider \\(age\\)/ {print $1}' | while read env_key; do
+  fnox set "$env_key" "$(fnox get "$env_key")" --provider age
+done
+"""
+
+[tasks."prod:scp"]
 description = "SCP"
 run="""
 scp -i $VPS_SSH_PUB_KEY

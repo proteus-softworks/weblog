@@ -1,0 +1,13 @@
+---
+import * as strava from "../lib/strava";
+const stats = await strava.getStats();
+const ytdMiles = Math.round(stats.ytd_ride_totals.distance / 1609.34);
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+{ytdMiles}

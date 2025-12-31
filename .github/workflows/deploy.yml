@@ -24,7 +24,14 @@ jobs:
 
       - name: Update submodules to latest remote
         run: git submodule update --init --recursive --remote
-        
+
+      - name: Setup fnox age key
+        env:
+          FNOX_AGE_KEY: ${{ secrets.FNOX_AGE_KEY }}
+        run: |
+          # Key is set via environment variable
+          echo "Age key configured"
+
       - name: Convert all weblog docs to MDX
         run: |
           for f in src/content/weblog-docs/*.md; do
@@ -44,7 +51,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: true

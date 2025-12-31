@@ -5,6 +5,7 @@ pubDate: "Nov 29 2025"
 ---
 
 import Avatar from '../../components/RandomAvatar.astro';
+import StravaYtdMiles from "../../components/StravaYtdMiles.astro";
 
 Blah blah blah blah
 
@@ -24,4 +25,7 @@ Blah blah blah
 
 ## Heading
 
-aldjfalksdjlkasd falksdjl 
+aldjfalksdjlkasd falksdjl
+
+- [ ] Ride one million miles
+  - Miles ridden: <StravaYtdMiles server:defer><Fragment slot="fallback">checking Strava...</Fragment></StravaYtdMiles>
