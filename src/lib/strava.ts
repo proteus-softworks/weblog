@@ -53,9 +53,6 @@ async function getAccessToken() {
         refresh_token: process.env.STRAVA_REFRESH_TOKEN,
         grant_type: "refresh_token",
       },
-      cache: {
-        ttl: 1000 * 60, // 1 minute.
-      },
     },
   );
 
