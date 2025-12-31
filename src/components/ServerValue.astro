@@ -1,0 +1,32 @@
+---
+import Identity from "@/components/Identity.astro";
+import { StravaGateway } from "@/lib/strava";
+
+export interface Props {
+  name: "stravaYtdMiles" | "test";
+  fallback?: string;
+}
+
+const { name, fallback: propFallback } = Astro.props;
+
+let getValue: () => Promise<string | number> = async () => "Heck :/";
+let fallback = propFallback ?? "Loading...";
+
+switch (name) {
+  case "stravaYtdMiles":
+    getValue = StravaGateway.getYtdMiles;
+    fallback = "Checking Strava...";
+    break;
+  case "test":
+    getValue = async () => "Ayyyyy :D";
+    break;
+  default:
+    throw Error("Invalid ServerString name");
+}
+
+const value = await getValue();
+---
+
+<Identity server:defer value={value}>
+  <Fragment slot="fallback">{fallback}</Fragment>
+</Identity>

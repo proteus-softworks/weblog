@@ -35,6 +35,10 @@ export const StravaGateway = {
 
     return response.data;
   },
+  async getYtdMiles() {
+    const stats = await StravaGateway.getStats();
+    return Math.round(stats.ytd_ride_totals.distance / 1609.34);
+  },
 };
 
 /******************************************************************************
