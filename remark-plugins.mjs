@@ -1,6 +1,6 @@
 import { visit, SKIP } from "unist-util-visit";
 
-export function remarkModifyContent() {
+export function remarkServerValues() {
   return (tree) => {
     visit(tree, "text", (node, index, parent) => {
       const regex = /#\(([^)]*)\):(\(([^)]*)\))?/g;
@@ -43,6 +43,48 @@ export function remarkModifyContent() {
               ],
             },
           ],
+        });
+
+        lastIndex = match.index + match[0].length;
+      }
+
+      if (lastIndex < node.value.length) {
+        children.push({
+          type: "text",
+          value: node.value.slice(lastIndex),
+        });
+      }
+
+      parent.children.splice(index, 1, ...children);
+      return [SKIP, index + children.length];
+    });
+  };
+}
+
+export function remarkBacklinks() {
+  return (tree) => {
+    visit(tree, "text", (node, index, parent) => {
+      const regex = /\(([^)]*)\)\[\[([^\]]*)\]\]/g;
+
+      if (!regex.test(node.value)) return;
+
+      regex.lastIndex = 0;
+
+      const children = [];
+      let lastIndex = 0;
+      let match;
+
+      while ((match = regex.exec(node.value)) !== null) {
+        if (match.index > lastIndex) {
+          children.push({
+            type: "text",
+            value: node.value.slice(lastIndex, match.index),
+          });
+        }
+
+        children.push({
+          type: "html",
+          value: `<a href="${match[2]}">${match[1]}</a>`,
         });
 
         lastIndex = match.index + match[0].length;
