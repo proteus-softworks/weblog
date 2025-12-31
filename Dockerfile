@@ -35,7 +35,7 @@ RUN pnpm install --offline
 # ---- Build ----
 FROM build-deps AS build
 COPY . .
-RUN pnpm run build
+RUN fnox exec -- pnpm run build
 
 # ---- Runtime ----
 FROM debian:12-slim AS runtime

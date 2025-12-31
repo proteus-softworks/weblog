@@ -24,7 +24,7 @@ switch (name) {
     throw Error("Invalid ServerString name");
 }
 
-const value = await getValue();
+const value = await getValue().catch(() => "[fetch error]");
 ---
 
 <Identity server:defer value={value}>
