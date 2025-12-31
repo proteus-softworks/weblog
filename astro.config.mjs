@@ -3,6 +3,7 @@
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
+import { remarkModifyContent } from "./remark-plugins.mjs";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -24,6 +25,7 @@ export default defineConfig({
   }),
 
   markdown: {
+    remarkPlugins: [remarkModifyContent],
     shikiConfig: {
       // https://shiki.style/themes
       theme: "catppuccin-mocha",

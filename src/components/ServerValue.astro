@@ -8,6 +8,7 @@ export interface Props {
 const { name } = Astro.props;
 
 let getValue: () => Promise<string | number> = async () => "Heck :/";
+let missingName = false;
 
 switch (name) {
   case "stravaYtdMiles":
@@ -17,10 +18,11 @@ switch (name) {
     getValue = async () => "Ayyyyy :D";
     break;
   default:
-    throw Error("Invalid ServerString name");
+    getValue = async () => `[${name}]`;
+    missingName = true;
 }
 
 const value = await getValue().catch(() => "[fetch error]");
 ---
 
-{value}
+{missingName ? <span class="text-error">{value}</span> : value}
