@@ -17,11 +17,9 @@ RUN curl https://mise.run | sh
 
 WORKDIR /app
 
-# Copy mise config and install tools
-COPY .mise.toml ./
-RUN mise install
+COPY mise.toml package.json pnpm-lock.yaml ./
 
-COPY package.json pnpm-lock.yaml ./
+RUN mise install
 
 # ---- Production dependencies ----
 FROM base AS prod-deps
