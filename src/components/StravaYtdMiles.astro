@@ -1,6 +1,6 @@
 ---
-import * as strava from "../lib/strava";
-const stats = await strava.getStats();
+import { StravaGateway } from "@/lib/strava";
+const stats = await StravaGateway.getStats();
 const ytdMiles = Math.round(stats.ytd_ride_totals.distance / 1609.34);
 
 export interface Props {
