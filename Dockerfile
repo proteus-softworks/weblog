@@ -17,7 +17,7 @@ RUN curl https://mise.run | sh
 
 WORKDIR /app
 
-COPY mise.toml package.json pnpm-lock.yaml ./
+COPY mise.toml fnox.toml package.json pnpm-lock.yaml ./
 
 RUN mise trust
 RUN mise install
@@ -55,12 +55,10 @@ ENV PATH="/mise/shims:$PATH"
 
 RUN curl https://mise.run | sh
 
-COPY --from=base /app/mise.toml ./mise.toml
+COPY --from=base /app/mise.toml /app/fnox.toml ./
 
 RUN mise trust
 RUN mise install
-
-COPY --from=base /app/fnox.toml ./fnox.toml
 
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
