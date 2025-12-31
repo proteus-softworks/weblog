@@ -19,6 +19,7 @@ WORKDIR /app
 
 COPY mise.toml package.json pnpm-lock.yaml ./
 
+RUN mise trust
 RUN mise install
 
 # ---- Production dependencies ----
