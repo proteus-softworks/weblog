@@ -30,11 +30,19 @@ run = "pnpm install"
 description = "Format files"
 run = "pnpm prettier --write ."
 
-[tasks.recrypt]
+[tasks."secrets:recrypt"]
 description = "Re-encrypt secrets"
 run = """
 fnox list | awk '/provider \\(age\\)/ {print $1}' | while read env_key; do
   fnox set "$env_key" "$(fnox get "$env_key")" --provider age
+done
+"""
+
+[tasks."secrets:dump"]
+description = "Dump secrets"
+run = """
+fnox list | awk '/provider \\(age\\)/ {print $1}' | while read env_key; do
+  echo $env_key=$(fnox get "$env_key")
 done
 """
 
